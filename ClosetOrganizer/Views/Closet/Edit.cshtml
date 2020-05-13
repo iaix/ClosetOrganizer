@@ -1,0 +1,42 @@
+﻿@model ClothItem
+@{
+}
+
+    <form asp-action="EditConfirm" method="post" class="form-horizontal" role="form">
+        <h1>Editing @Model.Name</h1>
+        <input type="hidden" asp-for="@Model.ClothItemId" />
+        <div class="form-group">
+            <label asp-for="@Model.Name">Name</label>
+            <input asp-for="@Model.Name" class="form-control" />
+            <span class="text-danger" asp-validation-for="@Model.Name"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.ShortDescription">ShortDescription</label>
+            <input asp-for="@Model.ShortDescription" class="form-control" />
+            <span class="text-danger" asp-validation-for="@Model.ShortDescription"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Style" class="col-md-2 control-label"></label>
+            <select class="col-md-2 form-control" asp-for="@Model.Style" asp-items="Html.GetEnumSelectList<ClothingStyle>()"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Color" class="col-md-2 control-label"></label>
+            <select class="col-md-2 form-control" asp-for="@Model.Color" asp-items="Html.GetEnumSelectList<ClothingColor>()"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Category" class="col-md-2 control-label"></label>
+            @await Component.InvokeAsync("CategoryList")
+            <input asp-for="Category" />
+        </div>
+        <div class="form-group form-check">
+            <input class="form-check-input" asp-for="IsWearable" />
+            <label asp-for="IsWearable" class="form-check-label"></label>
+        </div>
+        <div class="form-group">
+            <div class="col-md-5">
+                <input type="submit" class="btn btn-primary" value="Save changes" />
+            </div>
+        </div>
+    </form>

@@ -1,0 +1,4 @@
+﻿@model CategoryListViewModel
+
+@Html.DropDownListFor(m=> m.Categories, new SelectList(Model.Categories, "CategoryId", "CategoryName"))
+

@@ -1,0 +1,13 @@
+﻿@model ClothListViewModel
+@{
+}
+
+<h1>@Model.CurrentCategory</h1>
+
+
+@foreach (var cloth in Model.ClothItems)
+{
+    <partial name="_Summary" model="cloth" />
+}
+
+<a class="btn btn-primary" asp-controller="NewItem" asp-action="AddNewItem">Add new</a>

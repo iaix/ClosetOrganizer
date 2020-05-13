@@ -1,0 +1,37 @@
+﻿@model ClothItem
+@{
+}
+
+<form method="get" class="form-horizontal" role="form">
+    <h1>@Model.Name</h1>
+    <input type="hidden" asp-for="@Model.ClothItemId" />
+    <div>        
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ShortDescription)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ShortDescription)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Style)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Style)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Color)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Color)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Category.CategoryName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Category.CategoryName)
+            </dd>
+        </dl>
+    </div>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Closet" asp-action="List">Back to list</a>
+</form>

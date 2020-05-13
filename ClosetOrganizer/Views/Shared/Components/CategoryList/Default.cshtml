@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Category>
+
+
+
+    <select class="col-md-2 form-control"  >
+            @foreach (var category in Model)
+            {
+        <option>@category.CategoryName</option>
+            }
+    </select>
