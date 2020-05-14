@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using ClosetOrganizer.Models;
 using Microsoft.AspNetCore.Mvc;
 
+// github test
+
 namespace ClosetOrganizer.ViewModel
 {
     public class CategoryList : ViewComponent
