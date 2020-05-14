@@ -12,6 +12,20 @@ a {
   color: #0366d6;
 }
 
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -60,6 +74,9 @@ html {
 
 body {
   /* Margin bottom by footer height */
+  padding-top: 70px;
+  background-image: url('/images/pattern4.png');
+  background-repeat: repeat;
   margin-bottom: 60px;
 }
 .footer {

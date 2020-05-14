@@ -26,7 +26,7 @@ namespace ClosetOrganizer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IClothItemRepository, ClothItemRepository>();
         }

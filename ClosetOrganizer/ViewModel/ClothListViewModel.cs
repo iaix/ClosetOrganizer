@@ -11,5 +11,6 @@ namespace ClosetOrganizer.ViewModel
     {
         public IEnumerable<ClothItem> ClothItems { get; set; }
         public string CurrentCategory { get; set; }
+        public ClothingColor Color { get; set; }
     }
 }

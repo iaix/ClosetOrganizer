@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using ClosetOrganizer.Models;
 using ClosetOrganizer.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using PagedList;
 
 namespace ClosetOrganizer.Controllers
 {
@@ -12,6 +14,7 @@ namespace ClosetOrganizer.Controllers
     {
         private readonly IClothItemRepository clothItemRepository;
         private readonly ICategoryRepository categoryRepository;
+        public string SearchTerm { get; set; }
 
         public ClosetController(IClothItemRepository clothItemRepository, ICategoryRepository categoryRepository)
         {
@@ -19,16 +22,16 @@ namespace ClosetOrganizer.Controllers
             this.categoryRepository = categoryRepository;
         }
 
-        public ViewResult List()
-        {
-            IEnumerable<ClothItem> clothItems;
+        //public ViewResult List()
+        //{
+        //    IEnumerable<ClothItem> clothItems;
 
-            clothItems = clothItemRepository.AllClothes.OrderBy(c=>c.Name);
-            return View(new ClothListViewModel
-            {
-                ClothItems = clothItems
-            });
-        }
+        //    clothItems = clothItemRepository.AllClothes.OrderBy(c=>c.Name);
+        //    return View(new ClothListViewModel
+        //    {
+        //        ClothItems = clothItems
+        //    });
+        //}
         public ViewResult GetListOfCategoryName()
         {
             return View(categoryRepository.AllCategories.Select(c => c.CategoryName).ToList());
@@ -75,5 +78,24 @@ namespace ClosetOrganizer.Controllers
             var viewModel = new CategoryListViewModel { Categories = categories };
             return View(viewModel);
         }
+
+        public IActionResult List(string searchName, bool isWereable, int page)
+        {
+            int pageSize = 4;
+
+            var clothes = from c in clothItemRepository.AllClothes select c;
+            if (isWereable) clothes = clothes.Where(s => s.IsWearable);
+            if (!String.IsNullOrEmpty(searchName))
+            {
+                clothes = clothes.Where(s => s.Name.Contains(searchName)).Skip((page-1)*pageSize);
+            }
+
+            return View(new ClothListViewModel
+            {
+                ClothItems = clothes
+            });
+        }
+
+
     }
 }
