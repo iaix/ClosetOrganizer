@@ -24,6 +24,11 @@
     <div class="dropdown-divider"></div>
 </form>
 
+@if(Model.Message!=null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
 <div class="row">
 
     @foreach (var cloth in Model.ClothItems)
@@ -33,5 +38,5 @@
 </div>
 <div class="dropdown-divider"></div>
 
-<a class="btn btn-primary" asp-controller="NewItem" asp-action="AddNewItem">Add new</a>
+<a class="btn btn-primary" asp-controller="Closet" asp-action="AddNewItem">Add new</a>
 

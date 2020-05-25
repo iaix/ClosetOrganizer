@@ -20,6 +20,7 @@ namespace ClosetOrganizer.Controllers
 
         public IActionResult AddNewItem()
         {
+
             return View();
         }
 

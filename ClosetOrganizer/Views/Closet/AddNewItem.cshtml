@@ -1,0 +1,14 @@
+﻿@model ClothItem
+@{
+}
+
+
+<form asp-action="AddNewItem" method="post" class="form-horizontal" role="form">
+    <h4>Add new clothes to the closet</h4>
+    <partial name="_EditAddPartial" />
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

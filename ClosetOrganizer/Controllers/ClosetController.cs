@@ -16,6 +16,7 @@ namespace ClosetOrganizer.Controllers
         private readonly ICategoryRepository categoryRepository;
         public string SearchTerm { get; set; }
 
+
         public ClosetController(IClothItemRepository clothItemRepository, ICategoryRepository categoryRepository)
         {
             this.clothItemRepository = clothItemRepository;
@@ -60,14 +61,21 @@ namespace ClosetOrganizer.Controllers
             }
 
             clothItemRepository.Update(clothItem);
+            TempData["Message"] = $"Item {clothItem.Name} updated!";
+
             return RedirectToAction("List");
         }
 
 
         public RedirectToActionResult RemoveFromCloset(int id)
         {
-            var cloth = clothItemRepository.AllClothes.FirstOrDefault(c => c.ClothItemId == id);
-            if (cloth != null) clothItemRepository.Delete(id);
+            var clothItem = clothItemRepository.AllClothes.FirstOrDefault(c => c.ClothItemId == id);
+            if (clothItem != null)
+            {
+                TempData["Message"] = $"Item {clothItem.Name} deleted from database!";
+                clothItemRepository.Delete(id);
+            }
+
             return RedirectToAction("List");
         }
 
@@ -87,13 +95,29 @@ namespace ClosetOrganizer.Controllers
             if (isWereable) clothes = clothes.Where(s => s.IsWearable);
             if (!String.IsNullOrEmpty(searchName))
             {
-                clothes = clothes.Where(s => s.Name.Contains(searchName)).Skip((page-1)*pageSize);
+                clothes = clothes.Where(s => s.Name.ToLower().Contains(searchName.ToLower())).Skip((page-1)*pageSize);
             }
 
+            string msg = (string)TempData["Message"];
             return View(new ClothListViewModel
             {
-                ClothItems = clothes
-            });
+                ClothItems = clothes,
+                Message = msg
+            }) ;
+        }
+
+        public IActionResult AddNewItem()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddNewItem(ClothItem clothItem)
+        {
+            clothItemRepository.Create(clothItem);
+            TempData["Message"] = $"Item {clothItem.Name} added to database!";
+
+            return RedirectToAction("List");
         }
 
 

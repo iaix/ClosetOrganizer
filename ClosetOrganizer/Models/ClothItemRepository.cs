@@ -61,14 +61,14 @@ namespace ClosetOrganizer.Models
             
         }
 
-        public IEnumerable<ClothItem> GetClothByName(string name)
-        {
-            var query = from c in appDbContext.ClothItems
-                        where c.Name.ToLower().StartsWith(name.ToLower()) || string.IsNullOrEmpty(name)
-                        orderby c.Name
-                        select c;
-            return query;
-        }
+        //public IEnumerable<ClothItem> GetClothByName(string name)
+        //{
+        //    var query = from c in appDbContext.ClothItems
+        //                where c.Name.ToLower().StartsWith(name.ToLower()) || string.IsNullOrEmpty(name)
+        //                orderby c.Name
+        //                select c;
+        //    return query;
+        //}
 
         public ClothItem Update(ClothItem updatedClothItem)
         {
